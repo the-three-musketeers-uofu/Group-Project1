@@ -116,15 +116,11 @@
 
     $.ajax(settings).done(function (response) {
       console.log(response)
-      var newmarker = L.marker(e.latlng).addTo(mymap);
+      aiq = response.data.indexes.baqi.aqi
+      console.log(aiq)
+      var popup = L.popup().setLatLng([latValue, longValue]).setContent("The AIQ vlaue of this coordinate is: " + aiq).openOn(mymap);
 
-//alert("You clicked the map at " + e.latlng);
-L.popup()
-  .setLatLng(e.latlng)
-  .setContent(e.latlng)
-  .openOn(mymap);
-
-    });
+    })
 
 
 
