@@ -2,16 +2,18 @@
 <html lang="en">
 
 <head>
-  <title>Title</title>
+  <title>SmogBeGone</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
     crossorigin="" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -24,7 +26,7 @@
 
 <body>
   <nav id="nav" class="navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand" href="#">SmogBeGone</a>
+    <a class="navbar-brand" href="#">SmogBeGone <img id="logo" src="/assets/images/wind2.png" alt="logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -44,7 +46,7 @@
             More
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Make A Donation</a>
+            <a class="dropdown-item" href="#">Donate</a>
             <a class="dropdown-item" href="#">References</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">Meet Adam</a>
@@ -60,24 +62,29 @@
 
   <main class="row">
     <div class="col-6">
-        <di><h3>Be notified when the air is bad!</h3></di>
-      <div class="card" style="width: auto;">
-        
+      <di>
+        <h3>Be notified when the air is bad!</h3>
+      </di>
+      <div class="card shadow-lg p-3 mb-5 bg-white rounded" id="mainCard"style="width: auto;">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
           </ol>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img class="d-block w-100" src="assets/images/air1.jpg" alt="First slide">
+              <img class="d-block w-100" src="assets/images/draper.jpg" alt="First slide">
             </div>
             <div class="carousel-item">
-              <img class="d-block w-100" src="assets/images/air2.jpg" alt="Second slide">
+              <img class="d-block w-100" src="assets/images/draper2.jpg" alt="Second slide">
             </div>
             <div class="carousel-item">
-              <img class="d-block w-100" src="assets/images/air3.jpg" alt="Third slide">
+              <img class="d-block w-100" src="assets/images/inversion.jpg" alt="Third slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100" src="assets/images/air3.jpg" alt="Forth slide">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -89,11 +96,16 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-      </div>
+      
       <div class="card-body">
-        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos explicabo praesentium possimus dolore voluptas saepe aperiam reiciendis rem at numquam incidunt illo voluptatum pariatur nam omnis, maxime laborum consequatur quo adipisci amet alias ea debitis nostrum. Debitis, sed ducimus ullam consequatur aliquam velit voluptatem totam quidem aspernatur temporibus enim. Eius optio quidem, praesentium beatae eum repellat consequatur! Natus perspiciatis in quo. Asperiores, labore dolorum quo obcaecati mollitia dicta eveniet esse, nobis illo ullam dolor. Quos nemo delectus voluptate sunt, dolore quo accusantium eaque quod minima quidem doloremque, at velit voluptates?</p>
+        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos explicabo praesentium
+          possimus dolore voluptas saepe aperiam reiciendis rem at numquam incidunt illo voluptatum pariatur nam omnis,
+          maxime laborum consequatur quo adipisci amet alias ea debitis nostrum. Debitis, sed ducimus ullam consequatur
+          aliquam velit voluptatem totam quidem aspernatur temporibus enim?</p>
+      </div>
       </div>
     </div>
+  
 
     <div class="col-6" id="mapid"></div>
 
