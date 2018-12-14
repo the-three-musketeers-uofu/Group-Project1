@@ -1,1 +1,22 @@
-#mapid { height: 2000px;}
+#mapid { 
+       height: calc(100vh - 56px);
+  }
+
+#nav {
+    background-color: #293D52;
+    
+}
+.nav-bar{
+    color: aliceblue;
+}
+.card {
+    margin-top: 40px;
+    margin-left: 10px;
+}
+#navbarSupportedContent{
+    color: gray;
+}
+h3{
+    text-align: center;
+    margin-top: 10px;
+}
