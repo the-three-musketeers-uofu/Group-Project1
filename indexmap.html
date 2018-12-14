@@ -89,13 +89,35 @@
     }).addTo(mymap);
 
     function onMapClick(e) {
-      var newmarker = L.marker(e.latlng).addTo(mymap);
+      console.log(e.latlng)
+      console.log(e.latlng.lat)
+      console.log(e.latlng.lng)
+      var latitude = e.latlng.lat
+      var longitude = e.latlng.lng
 
-      //alert("You clicked the map at " + e.latlng);
-      L.popup()
-        .setLatLng(e.latlng)
-        .setContent(e.latlng)
-        .openOn(mymap);
+      var apiurl = "https://api.breezometer.com/air-quality/v2/current-conditions?lat=" + latitude + "&lon=" + longitude + "&key=6fa2adc95b8c4b23bd7e05f4cd313cf1"
+
+      var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": apiurl,
+        "method": "GET"
+      }
+
+      $.ajax(settings).done(function (response) {
+        console.log(response)
+        aiq = response.data.indexes.baqi.aqi
+        console.log(aiq)
+        var popup = L.popup().setLatLng([latitude, longitude]).setContent("The AIQ vlaue of this coordinate is: " + aiq).openOn(mymap);
+
+      })
+      //var newmarker = L.marker(e.latlng).addTo(mymap);
+
+      ////alert("You clicked the map at " + e.latlng);
+      //L.popup()
+      //  .setLatLng(e.latlng)
+      //  .setContent(e.latlng)
+      //  .openOn(mymap);
     }
 
 
