@@ -12,7 +12,7 @@
     crossorigin="anonymous">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
     crossorigin="" />
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="assets/css/indexstyle.css">
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
@@ -60,9 +60,11 @@
 
   <main class="row">
     <div class="col-6">
-        <di><h3>Be notified when the air is bad!</h3></di>
+      <di>
+        <h3>Be notified when the air is bad!</h3>
+      </di>
       <div class="card" style="width: auto;">
-        
+
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -91,7 +93,13 @@
         </div>
       </div>
       <div class="card-body">
-        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos explicabo praesentium possimus dolore voluptas saepe aperiam reiciendis rem at numquam incidunt illo voluptatum pariatur nam omnis, maxime laborum consequatur quo adipisci amet alias ea debitis nostrum. Debitis, sed ducimus ullam consequatur aliquam velit voluptatem totam quidem aspernatur temporibus enim. Eius optio quidem, praesentium beatae eum repellat consequatur! Natus perspiciatis in quo. Asperiores, labore dolorum quo obcaecati mollitia dicta eveniet esse, nobis illo ullam dolor. Quos nemo delectus voluptate sunt, dolore quo accusantium eaque quod minima quidem doloremque, at velit voluptates?</p>
+        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos explicabo praesentium
+          possimus dolore voluptas saepe aperiam reiciendis rem at numquam incidunt illo voluptatum pariatur nam omnis,
+          maxime laborum consequatur quo adipisci amet alias ea debitis nostrum. Debitis, sed ducimus ullam consequatur
+          aliquam velit voluptatem totam quidem aspernatur temporibus enim. Eius optio quidem, praesentium beatae eum
+          repellat consequatur! Natus perspiciatis in quo. Asperiores, labore dolorum quo obcaecati mollitia dicta
+          eveniet esse, nobis illo ullam dolor. Quos nemo delectus voluptate sunt, dolore quo accusantium eaque quod
+          minima quidem doloremque, at velit voluptates?</p>
       </div>
     </div>
 
@@ -100,13 +108,6 @@
 
 
   </main>
-
-
-
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
-
 
   <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
     crossorigin=""></script>
@@ -151,17 +152,47 @@
     }
 
     $.ajax(settings).done(function (response) {
-      console.log(response)
       aiq = response.data.indexes.baqi.aqi
-      console.log(aiq)
-      var popup = L.popup().setLatLng([latValue, longValue]).setContent("The AIQ vlaue of this coordinate is: " + aiq).openOn(mymap);
+      //var popup = L.popup().setLatLng([latValue, longValue]).setContent("The AIQ vlaue of this coordinate is: " + aiq).openOn(mymap);
 
     })
 
 
+    var apiurl2 = "https://api.aerisapi.com/airquality/salt lake city, ut?&format=json&client_id=JwgqhYQhvLurMFgNtLWIa&client_secret=3lHajUM0DM5qsTR7YcG61U6tAxeDDie5tN85BbCV"
 
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": apiurl2,
+      "method": "GET"
+    }
 
+    $.ajax(settings).done(function (response) {
+      stationsarray = response.response[0].profile.stations
+      for (var i = 0; i < stationsarray.length; i++) {
+        stationid = stationsarray[i];
+        var apiurl3 = "https://api.aerisapi.com/airquality/" + stationid + "?&format=json&client_id=JwgqhYQhvLurMFgNtLWIa&client_secret=3lHajUM0DM5qsTR7YcG61U6tAxeDDie5tN85BbCV"
 
+        var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": apiurl3,
+          "method": "GET"
+        }
+
+        $.ajax(settings).done(function (response) {
+          var latValue = response.response.loc.lat
+          var longValue = response.response.loc.long
+          var aqi = response.response.periods[0].aqi
+          var newpopup = L.popup()
+            .setLatLng([latValue, longValue])
+            .setContent("aqi value is " + aqi)
+            .addTo(mymap);
+        })
+
+      }
+
+    })
 
 
   </script>
