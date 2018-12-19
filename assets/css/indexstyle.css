@@ -1,20 +1,50 @@
-
-
-#nav {
-    background-color: #293D52;
+/* *{
+    background-color: darkgray;
+} */
+#mapid { 
+    height: calc(100vh - 60px);
     
 }
-.nav-bar{
-    color: aliceblue;
+
+#nav {
+ background-color: #34597F;
+ 
 }
+.row{
+ background-color: #E9EBED;
+ font-family: 'Roboto', 'Roboto Condensed', sans-serif;
+
+ 
+}
+.nav-bar{
+ color: aliceblue;
+}
+
+/* #mainCard{
+ background-color: #3B647F;
+
+} */
 .card {
-    margin-top: 40px;
-    margin-left: 10px;
+ margin-top: 20px;
+ margin-left: 10px;
+ border-color: #C8CBCC;
+
+
 }
 #navbarSupportedContent{
-    color: gray;
+ color: lightgrey;
 }
 h3{
-    text-align: center;
-    margin-top: 10px;
+ text-align: center;
+ margin-top: 10px;
+ color: #505152;
+ margin-top: 20px;
+}
+
+img{
+ height: 300px;
+}
+#logo{
+ height: 2em;
+ width: auto;
 }
