@@ -111,6 +111,7 @@
 
   <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
     crossorigin=""></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
 
   <script>
     var mymap = L.map('mapid').setView([39.3210, -111.0937], 8);
@@ -193,6 +194,31 @@
       }
 
     })
+    var config = {
+      apiKey: "AIzaSyBPHhSRYxJURpaPX2Wr2BiPs6peZeJWQ1w",
+      authDomain: "smogbegone-49e43.firebaseapp.com",
+      databaseURL: "https://smogbegone-49e43.firebaseio.com",
+      projectId: "smogbegone-49e43",
+      storageBucket: "",
+      messagingSenderId: "95406670846"
+    };
+    firebase.initializeApp(config);
+    var database = firebase.database();
+
+    database.ref('stations/').on("child_added", function (snapshot) {
+      aqival = snapshot.val().aqi;
+      colorval = snapshot.val().color;
+      latval = snapshot.val().lat;
+      lonval = snapshot.val().lon;
+
+      var newpopup = L.popup()
+            .setLatLng([latval, lonval])
+            .setContent("aqi value is " + aqival)
+            .addTo(mymap);
+    }, function (errorObject) {
+      console.log("Errors handled: " + errorObject.code);
+    });
+
 
 
   </script>
