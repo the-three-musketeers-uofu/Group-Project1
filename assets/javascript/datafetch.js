@@ -36,11 +36,21 @@ function callback(error, response) {
             var statlat2 = response.body.results[i].Lat
             var statlon3 = response.body.results[i].Lon
             var stataqi4 = response.body.results[i].PM2_5Value
+            if (stataqi4 < 50) {
+                statcolor = "#00FF00"
+            }
+            else if (stataqi4 < 100 && stataqi4 > 50) {
+                statcolor = "#FFFF00"
+            }
+            else {
+                statcolor = "#FF0000"
+            }
             database.ref('stations/' + statid1).set({
                 id: statid1,
                 lat: statlat2,
                 lon: statlon3,
                 aqi: stataqi4,
+                color: statcolor,
                 source: "purpleair",
             }); 
         
@@ -63,15 +73,26 @@ function callback2(error, response) {
     
     for(var i = 0; i < response.body.length; i++) {
         //console.log(response.body)
+      var statcolor = "";
       var statid1 = Math.floor(Math.abs(response.body[i].Latitude) + Math.abs(response.body[i].Longitude))
       var statlat2 = response.body[i].Latitude
       var statlon3 = response.body[i].Longitude
       var stataqi4 = response.body[i].AQI
+      if (stataqi4 < 50) {
+          statcolor = "#00FF00"
+      }
+      else if (stataqi4 < 100 && stataqi4 > 50) {
+          statcolor = "#FFFF00"
+      }
+      else {
+          statcolor = "#FF0000"
+      }
       database.ref('stations/' + statid1).set({
                 id: statid1,
                 lat: statlat2,
                 lon: statlon3,
                 aqi: stataqi4,
+                color: statcolor,
                 source: "airnow",
             }); 
         
