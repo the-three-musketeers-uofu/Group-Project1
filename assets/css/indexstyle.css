@@ -48,3 +48,10 @@ img{
  height: 2em;
  width: auto;
 }
+.text {
+    font-weight: bold;
+    font-size: 10px;
+    background: transparent;
+    box-shadow: none;
+    border:0;
+}

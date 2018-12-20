@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 
@@ -66,7 +65,7 @@
       <di>
         <h3>Be notified when the air is bad!</h3>
       </di>
-      <div class="card shadow-lg p-3 mb-5 bg-white rounded" id="mainCard"style="width: auto;">
+      <div class="card shadow-lg p-3 mb-5 bg-white rounded" id="mainCard" style="width: auto;">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -101,16 +100,18 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-      
-      <div class="card-body">
-        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos explicabo praesentium
-          possimus dolore voluptas saepe aperiam reiciendis rem at numquam incidunt illo voluptatum pariatur nam omnis,
-          maxime laborum consequatur quo adipisci amet alias ea debitis nostrum. Debitis, sed ducimus ullam consequatur
-          aliquam velit voluptatem totam quidem aspernatur temporibus enim?</p>
-      </div>
+
+        <div class="card-body">
+          <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos explicabo praesentium
+            possimus dolore voluptas saepe aperiam reiciendis rem at numquam incidunt illo voluptatum pariatur nam
+            omnis,
+            maxime laborum consequatur quo adipisci amet alias ea debitis nostrum. Debitis, sed ducimus ullam
+            consequatur
+            aliquam velit voluptatem totam quidem aspernatur temporibus enim?</p>
+        </div>
       </div>
     </div>
-  
+
 
     <div class="col-6" id="mapid"></div>
 
@@ -127,92 +128,8 @@
 
   <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
     crossorigin=""></script>
-
-  <script>
-    var mymap = L.map('mapid').setView([39.3210, -111.0937], 8);
-    var marker = L.marker([51.5, -0.09]).addTo(mymap);
-    var testmarker = L.marker([40.715279, -124.201393]).addTo(mymap)
-
-
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidmFzaGVyeSIsImEiOiJjanA4eGFlcHEwMTk5M3ZtOGd1cDNvNGtpIn0.NTgjq3RtaFskoyWeOEB10A', {
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-      maxZoom: 18,
-      id: 'mapbox.streets',
-      accessToken: 'your.mapbox.access.token'
-    }).addTo(mymap);
-
-    function onMapClick(e) {
-      var newmarker = L.marker(e.latlng).addTo(mymap);
-
-      //alert("You clicked the map at " + e.latlng);
-      L.popup()
-        .setLatLng(e.latlng)
-        .setContent(e.latlng)
-        .openOn(mymap);
-    }
-
-
-    mymap.on('click', onMapClick);
-
-
-    var latValue = 39.3210
-    var longValue = -111.0937
-
-    var apiurl = "https://api.breezometer.com/air-quality/v2/current-conditions?lat=" + latValue + "&lon=" + longValue + "&key=6fa2adc95b8c4b23bd7e05f4cd313cf1"
-
-    var settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": apiurl,
-      "method": "GET"
-    }
-
-    $.ajax(settings).done(function (response) {
-      aiq = response.data.indexes.baqi.aqi
-      //var popup = L.popup().setLatLng([latValue, longValue]).setContent("The AIQ vlaue of this coordinate is: " + aiq).openOn(mymap);
-
-    })
-
-
-    var apiurl2 = "https://api.aerisapi.com/airquality/salt lake city, ut?&format=json&client_id=JwgqhYQhvLurMFgNtLWIa&client_secret=3lHajUM0DM5qsTR7YcG61U6tAxeDDie5tN85BbCV"
-
-    var settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": apiurl2,
-      "method": "GET"
-    }
-
-    $.ajax(settings).done(function (response) {
-      stationsarray = response.response[0].profile.stations
-      for (var i = 0; i < stationsarray.length; i++) {
-        stationid = stationsarray[i];
-        var apiurl3 = "https://api.aerisapi.com/airquality/" + stationid + "?&format=json&client_id=JwgqhYQhvLurMFgNtLWIa&client_secret=3lHajUM0DM5qsTR7YcG61U6tAxeDDie5tN85BbCV"
-
-        var settings = {
-          "async": true,
-          "crossDomain": true,
-          "url": apiurl3,
-          "method": "GET"
-        }
-
-        $.ajax(settings).done(function (response) {
-          var latValue = response.response.loc.lat
-          var longValue = response.response.loc.long
-          var aqi = response.response.periods[0].aqi
-          var newpopup = L.popup()
-            .setLatLng([latValue, longValue])
-            .setContent("aqi value is " + aqi)
-            .addTo(mymap);
-        })
-
-      }
-
-    })
-
-
-  </script>
-
+  <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+  <script src="assets/javascript/index.js"></script>
 
 </body>
 
