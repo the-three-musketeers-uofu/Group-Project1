@@ -1,6 +1,11 @@
-var mymap = L.map('mapid').setView([39.3210, -111.0937], 8);
-var marker = L.marker([51.5, -0.09]).addTo(mymap);
-var testmarker = L.marker([40.715279, -124.201393]).addTo(mymap)
+
+var currentlocation = navigator.geolocation.getCurrentPosition(function (position) {
+    var usercurrentlat = position.coords.latitude
+    var usercurrentlon = position.coords.longitude
+    mymap.setView([usercurrentlat, usercurrentlon], 10);
+});
+var mymap = L.map('mapid').setView([39.50, -98.35], 6);
+var subStationArray = [];
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidmFzaGVyeSIsImEiOiJjanA4eGFlcHEwMTk5M3ZtOGd1cDNvNGtpIn0.NTgjq3RtaFskoyWeOEB10A', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -13,48 +18,58 @@ function onMapmove(e) {
     $(".leaflet-tooltip").remove();
     $(".leaflet-interactive").remove();
 
-    toprightlat = mymap.getBounds()._northEast.lat
-    toprightlon = mymap.getBounds()._northEast.lng
-    bottomleftlat = mymap.getBounds()._southWest.lat
-    bottomleftlon = mymap.getBounds()._southWest.lng
+    if (mymap.getZoom() >= 9) {
+        toprightlat = mymap.getBounds()._northEast.lat
+        toprightlon = mymap.getBounds()._northEast.lng
+        bottomleftlat = mymap.getBounds()._southWest.lat
+        bottomleftlon = mymap.getBounds()._southWest.lng
 
-    for (var i = 0; i < stationsarray.length; i++) {
-        var split = stationsarray[i].split("_")
-        var stationlat = split[0]
-        var stationlon = split[1]
-        var latrep = stationlat.replace(",", ".")
-        var lonrep = stationlon.replace(",", ".")
-        var latloncheck = checkBoundBox(toprightlat, toprightlon, bottomleftlat, bottomleftlon, lonrep, latrep)
-        if (latloncheck === true) {
-            database.ref('stations/' + stationsarray[i]).on('value', function (snapshot) {
-                var latValue = snapshot.val().lat
-                var longValue = snapshot.val().lon
-                var aqi = Math.floor(snapshot.val().aqi)
-                var colorValue = snapshot.val().color
-                var source = snapshot.val().source
-                var circle = L.circleMarker([], { color: colorValue, fill: true, fillOpacity: 1 })
-                    .setLatLng([latValue, longValue])
-                    .addTo(mymap);
+        for (var i = 0; i < stationsarray.length; i++) {
+            var split = stationsarray[i].split("_")
+            var stationlat = split[0]
+            var stationlon = split[1]
+            var latrep = stationlat.replace(",", ".")
+            var lonrep = stationlon.replace(",", ".")
+            var latloncheck = checkBoundBox(toprightlat, toprightlon, bottomleftlat, bottomleftlon, lonrep, latrep)
+            if (latloncheck === true) {
+                database.ref('stations/' + stationsarray[i]).on('value', function (snapshot) {
+                    var latValue = snapshot.val().lat
+                    var longValue = snapshot.val().lon
+                    var aqi = Math.floor(snapshot.val().aqi)
+                    var colorValue = snapshot.val().color
+                    var source = snapshot.val().source
+                    var circle = L.circleMarker([], { color: colorValue, fill: true, fillOpacity: 1 })
+                        .setLatLng([latValue, longValue])
+                        .addTo(mymap);
                     circle.bindPopup(source + "<br>" + stationlat + ", " + stationlon)
-                var text = L.tooltip({
-                    permanent: true,
-                    direction: 'center',
-                    className: 'text'
+                    var text = L.tooltip({
+                        permanent: true,
+                        direction: 'center',
+                        className: 'text'
+                    })
+                        .setContent("" + aqi + "")
+                        .setLatLng([latValue, longValue]);
+
+                    text.addTo(mymap);
+
                 })
-                    .setContent("" + aqi + "")
-                    .setLatLng([latValue, longValue]);
-                
-                text.addTo(mymap);
-                
-            })
+
+            }
+            else {
+            }
 
         }
-        else {
-        }
+
+
+    }
+    else {
 
     }
 
+
+
 }
+
 
 mymap.on('moveend', onMapmove);
 
@@ -90,38 +105,38 @@ database.ref('stationlist/stationids').on('value', function (snapshot) {
 
 setTimeout(function () {
 
-    toprightlat = mymap.getBounds()._northEast.lat
-    toprightlon = mymap.getBounds()._northEast.lng
-    bottomleftlat = mymap.getBounds()._southWest.lat
-    bottomleftlon = mymap.getBounds()._southWest.lng
-    for (var i = 0; i < stationsarray.length; i++) {
-        var split = stationsarray[i].split("_")
-        var stationlat = split[0]
-        var stationlon = split[1]
-        var latrep = stationlat.replace(",", ".")
-        var lonrep = stationlon.replace(",", ".")
-        var latloncheck = checkBoundBox(toprightlat, toprightlon, bottomleftlat, bottomleftlon, lonrep, latrep)
-        if (latloncheck === true) {
-            database.ref('stations/' + stationsarray[i]).on('value', function (snapshot) {
-                var latValue = snapshot.val().lat
-                var longValue = snapshot.val().lon
-                var aqi = Math.floor(snapshot.val().aqi)
-                var colorValue = snapshot.val().color
-                var circle = L.circleMarker([], { color: colorValue, fill: true, fillOpacity: 1 })
-                    .setLatLng([latValue, longValue])
-                    .addTo(mymap);
-                var text = L.tooltip({
-                    permanent: true,
-                    direction: 'center',
-                    className: 'text'
-                })
-                    .setContent("" + aqi + "")
-                    .setLatLng([latValue, longValue]);
-                text.addTo(mymap);
-            })
-        }
-        else {
-        }
-    }
+    // toprightlat = mymap.getBounds()._northEast.lat
+    // toprightlon = mymap.getBounds()._northEast.lng
+    // bottomleftlat = mymap.getBounds()._southWest.lat
+    // bottomleftlon = mymap.getBounds()._southWest.lng
+    // for (var i = 0; i < stationsarray.length; i++) {
+    //     var split = stationsarray[i].split("_")
+    //     var stationlat = split[0]
+    //     var stationlon = split[1]
+    //     var latrep = stationlat.replace(",", ".")
+    //     var lonrep = stationlon.replace(",", ".")
+    //     var latloncheck = checkBoundBox(toprightlat, toprightlon, bottomleftlat, bottomleftlon, lonrep, latrep)
+    //     if (latloncheck === true) {
+    //         database.ref('stations/' + stationsarray[i]).on('value', function (snapshot) {
+    //             var latValue = snapshot.val().lat
+    //             var longValue = snapshot.val().lon
+    //             var aqi = Math.floor(snapshot.val().aqi)
+    //             var colorValue = snapshot.val().color
+    //             var circle = L.circleMarker([], { color: colorValue, fill: true, fillOpacity: 1 })
+    //                 .setLatLng([latValue, longValue])
+    //                 .addTo(mymap);
+    //             var text = L.tooltip({
+    //                 permanent: true,
+    //                 direction: 'center',
+    //                 className: 'text'
+    //             })
+    //                 .setContent("" + aqi + "")
+    //                 .setLatLng([latValue, longValue]);
+    //             text.addTo(mymap);
+    //         })
+    //     }
+    //     else {
+    //     }
+    // }
 }, 1000);
 

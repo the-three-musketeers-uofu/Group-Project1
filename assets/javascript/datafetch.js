@@ -71,7 +71,9 @@ function callback(error, response) {
 
     for (var i = 0; i < response.body.results.length; i++) {
         //console.log(i);
-        if (response.body.results[i].DEVICE_LOCATIONTYPE === 'outside' || response.body.results[i].DEVICE_LOCATIONTYPE === null && response.body.results[i].ParentID === null && response.body.results[i].PM2_5Value < 501) {
+        
+        if (response.body.results[i].ParentID === null && response.body.results[i].PM2_5Value < 501 && response.body.results[i].AGE < 500 && response.body.results[i].DEVICE_LOCATIONTYPE === "outside") {
+            console.log(response.body.results[i].AGE)
             if (response.body.results[i].Lat === null || response.body.results[i].Long === null) {
             }
             else {
