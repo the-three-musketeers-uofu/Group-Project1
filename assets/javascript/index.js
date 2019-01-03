@@ -2,7 +2,6 @@ var mymap = L.map('mapid').setView([39.3210, -111.0937], 8);
 var marker = L.marker([51.5, -0.09]).addTo(mymap);
 var testmarker = L.marker([40.715279, -124.201393]).addTo(mymap)
 
-
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidmFzaGVyeSIsImEiOiJjanA4eGFlcHEwMTk5M3ZtOGd1cDNvNGtpIn0.NTgjq3RtaFskoyWeOEB10A', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
@@ -32,9 +31,11 @@ function onMapmove(e) {
                 var longValue = snapshot.val().lon
                 var aqi = Math.floor(snapshot.val().aqi)
                 var colorValue = snapshot.val().color
+                var source = snapshot.val().source
                 var circle = L.circleMarker([], { color: colorValue, fill: true, fillOpacity: 1 })
                     .setLatLng([latValue, longValue])
                     .addTo(mymap);
+                    circle.bindPopup(source + "<br>" + stationlat + ", " + stationlon)
                 var text = L.tooltip({
                     permanent: true,
                     direction: 'center',
@@ -42,7 +43,9 @@ function onMapmove(e) {
                 })
                     .setContent("" + aqi + "")
                     .setLatLng([latValue, longValue]);
+                
                 text.addTo(mymap);
+                
             })
 
         }
@@ -75,6 +78,7 @@ var config = {
     storageBucket: "smogbegone-b3044.appspot.com",
     messagingSenderId: "1003431858350"
 };
+
 firebase.initializeApp(config);
 var database = firebase.database();
 
