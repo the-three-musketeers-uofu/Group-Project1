@@ -23,9 +23,15 @@
       color: #818181;
   }
   #mapid { 
-    height: 300px;
-    width: 100%;
+    height: 560px;
+    width: 560px;
+    margin-left: auto;
+    margin-right: auto;
  }
+ #map{
+    height: 600px;
+    padding: 10px 20px;
+  }
  .text {
     font-weight: bold;
     font-size: 10px;
@@ -58,6 +64,8 @@
   .container-fluid {
       padding: 60px 50px;
   }
+
+
   .bg-grey {
       background-color: #f6f6f6;
   }
@@ -163,6 +171,11 @@
       border-color: transparent;
       color: #fff !important;
   }
+  .subscribe{
+    width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+  }
   footer .glyphicon {
       font-size: 20px;
       margin-bottom: 20px;
@@ -240,7 +253,7 @@
             <div>
               <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a href="#about">ABOUT</a></li>
+                  <li><a href="#map">MAP</a></li>
                   <li><a href="#resources">RESOURCES</a></li>
                   <li><a href="#projects">PROJECTS</a></li>
                   <li><a href="#donate">DONATE</a></li>
@@ -253,11 +266,12 @@
         <div class="jumbotron text-center">
           <h1>Smog Be Gone</h1>
           <p>Providing Daily Air Quality Updates to Northern Utah</p>
-          <form>
+          <form class="subscribe">
             <div class="input-group">
               <input type="email" class="form-control" size="50" placeholder="Email Address" required>
               <div class="input-group-btn">
                 <button type="button" class="btn btn-danger">Sign up</button>
+                <!-- <button type="button" class="btn btn-danger" data-toggle="popover" title="Thank You!" data-content="We will contact you with updates">Subscribe</button> -->
               </div>
             </div>
           </form>
@@ -265,9 +279,9 @@
 
         <!-- <div id="mapid"></div> -->
         <!-- Container (About Section) -->
-        <div id="about" class="container-fluid">
+        <div id="map" class="container-fluid">
           <div class="row">
-            <div class="col-12" id="mapid">
+            <div class="col-md-6" id="mapid">
               <!-- <h2>About Smog Be Gone</h2><br>
               <h4>Three Students at the University of Utah Professional Coding Bootcamp got together to create an app
                 that can provide you with current air quality information of the Wasatch Front. </h4><br>
