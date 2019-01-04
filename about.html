@@ -9,16 +9,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="./assets/images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin="" />
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style>
+
     body {
       font: 400 15px Lato, sans-serif;
       line-height: 1.8;
       color: #818181;
   }
+  #mapid { 
+    height: 300px;
+    width: 100%;
+ }
+ .text {
+    font-weight: bold;
+    font-size: 10px;
+    background: transparent;
+    box-shadow: none;
+    border:0;
+}
   h2 {
       font-size: 24px;
       text-transform: uppercase;
@@ -253,7 +267,7 @@
         <!-- Container (About Section) -->
         <div id="about" class="container-fluid">
           <div class="row">
-            <div class="col-sm-12" id ="mapid">
+            <div class="col-12" id="mapid">
               <!-- <h2>About Smog Be Gone</h2><br>
               <h4>Three Students at the University of Utah Professional Coding Bootcamp got together to create an app
                 that can provide you with current air quality information of the Wasatch Front. </h4><br>
@@ -414,7 +428,7 @@
             <p>Bootstrap Theme Made By <a href="https://www.w3schools.com" title="Visit w3schools">www.w3schools.com</a></p>
           </footer>
 
-          <!-- <script>
+          <script>
             $(document).ready(function () {
               // Add smooth scrolling to all links in navbar + footer link
               $(".navbar a, footer a[href='#myPage']").on('click', function (event) {
@@ -449,7 +463,7 @@
                 });
               });
             })
-          </script> -->
+          </script>
           <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
             crossorigin=""></script>
           <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
