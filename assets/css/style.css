@@ -5,21 +5,23 @@
         color: #818181;
     }
     #mapid { 
-      height: 560px;
-      width: 560px;
+      height: 500px;
+      width: 65%;
       margin-left: auto;
       margin-right: auto;
+      
    }
-   #map{
-      height: 600px;
-      padding: 10px 20px;
-    }
+
    .text {
       font-weight: bold;
       font-size: 10px;
       background: transparent;
       box-shadow: none;
+      
       border:0;
+  }
+  #mainCard{
+      float: right;
   }
     h2 {
         font-size: 24px;
@@ -153,11 +155,11 @@
         border-color: transparent;
         color: #fff !important;
     }
-    .subscribe{
+    /* .subscribe{
       width: 350px;
       margin-left: auto;
       margin-right: auto;
-    }
+    } */
     footer .glyphicon {
         font-size: 20px;
         margin-bottom: 20px;
