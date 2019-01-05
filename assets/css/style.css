@@ -155,15 +155,18 @@
         border-color: transparent;
         color: #fff !important;
     }
-    /* .subscribe{
-      width: 350px;
-      margin-left: auto;
-      margin-right: auto;
-    } */
+footer {
+    background-color: #54a5c5;
+    color: #fff ;
+    height: 150px;
+    padding-bottom: 20px;
+}
     footer .glyphicon {
         font-size: 20px;
         margin-bottom: 20px;
-        color: #f4511e;
+        color: #fff;
+        top: 10px;
+
     }
     .slideanim {visibility:hidden;}
     .slide {
