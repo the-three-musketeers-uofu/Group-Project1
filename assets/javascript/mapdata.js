@@ -57,7 +57,7 @@ function onMapmove(e) {
                     var circle = L.circleMarker([], { stroke: true, color: bordercolor, fillColor: colorValue, fillOpacity: 1, weight: 3 })
                         .setLatLng([latValue, longValue])
                         .addTo(mymap);
-                    circle.bindPopup("Data Source: " + source + "<br>")
+                    circle.bindPopup("Data Source: " + source + "<br>" + "<button type='button' id='" + latrep + "," + lonrep + "' class='btn btn-primary' data-toggle='modal' data-target='#exampleModal' test='test'>sign up for notifications</button>")
                     var text = L.tooltip({
                         permanent: true,
                         direction: 'center',
