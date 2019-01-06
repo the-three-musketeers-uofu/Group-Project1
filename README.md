@@ -1,28 +1,16 @@
 Smog Be Gone
-Goal: Create a website that displays current air quality data by utilizing information from muliple API's.
+Goal: Create a website that displays current air quality data for Northern Utah by utilizing information from muliple API's.
 
-Contributors
+Contributors:
 Luke McRay
-Cisco
+Cisco Aravena
 Adam Jacobs
 
-Installation
-Index.html primarily created
+History:
+Index.html, CSS initially created. About.html created utilizing bootstrap. Map, Firebase, API's and CORS added to Index.HTML. All code from Index.html merged to About.html and About renamed Index.
 
-Usage
-TODO: Write usage instructions
-
-Contributing
-Fork it!
-Create your feature branch: git checkout -b my-new-feature
-Commit your changes: git commit -am 'Add some feature'
-Push to the branch: git push origin my-new-feature
-Submit a pull request :D
-History
-TODO: Write history
-
-Credits
+Credits:
 Hat tip to Purpleair.com and AirNow.com.
 
-License
+License:
 This project is licensed under the MIT License.
