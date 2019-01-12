@@ -131,4 +131,26 @@ database.ref('stationlist/stationids').on('value', function (snapshot) {
 
 })
 
-
+$( "#submitbutton" ).click(function() {
+    var name = $('#name').val();
+    var email = $('#email').val();
+    var comments = $('#comments').val();
+    $('#name').val('');
+    $('#email').val('');
+    $('#comments').val('');
+    (function(){
+        emailjs.init("user_dLIBicRVniGXl3AqR13PS");
+     })();
+    var templateParams = {
+        from_name: name,
+        from_email: email,
+        message_html: comments,
+    };
+     
+    emailjs.send('gmail', 'template_wnYao22B', templateParams)
+        .then(function(response) {
+           console.log('SUCCESS!', response.status, response.text);
+        }, function(error) {
+           console.log('FAILED...', error);
+        });
+  });
